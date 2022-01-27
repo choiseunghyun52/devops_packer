@@ -1,0 +1,19 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - echo "Install packer >> "
+      - curl -o packer.zip https://releases.hashicorp.com/packer/1.7.9/packer_1.7.9_linux_amd64.zip
+      - unzip packer.zip -d /usr/local/bin
+      - chmod +x /usr/local/bin/packer
+  build:
+    commands:
+      - packer validate -var-file="./packer/ami.pkrvars.hcl" ./packer
+      - packer build -var-file="./packer/ami.pkrvars.hcl" ./packer
+  post_build:
+    commands:
+      - echo "build completed on `date`"
+artifacts:
+  files:
+    - build.log
+  discard-paths: yes

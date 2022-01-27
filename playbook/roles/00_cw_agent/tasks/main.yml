@@ -1,0 +1,19 @@
+---
+- name: Install CloudWatch Agent
+  yum:
+    name:
+      - amazon-cloudwatch-agent
+    state: present
+
+- name: Download CloudWatch Agent Config
+  get_url:
+    url: https://raw.githubusercontent.com/dev-chulbuji/devops_infra/master/apne2/dev/ec2/bastion/templates/cloudwatch-agent-config.json
+    dest: /opt/aws/amazon-cloudwatch-agent/bin/config.json
+
+- name: Run CloudWatch Agent
+  shell: |
+    amazon-cloudwatch-agent-ctl \
+      -a fetch-config \
+      -m ec2 \
+      -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json \
+      -s

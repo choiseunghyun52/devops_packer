@@ -1,0 +1,14 @@
+---
+- name: Install docker
+  shell: "amazon-linux-extras install -y docker"
+
+- name: clean yum metadata cache
+  command: yum clean metadata
+  args:
+    warn: false
+
+- name: Installing docker-compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
+    dest: /usr/local/bin/docker-compose
+    mode: 0755
