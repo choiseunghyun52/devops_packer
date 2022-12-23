@@ -4,4 +4,4 @@ run:
 validate:
 	packer validate -var-file="./packer/ami.pkrvars.hcl" ./packer
 
-# test
+# test ggggg
