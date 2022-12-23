@@ -42,13 +42,13 @@ source "amazon-ebs" "this" {
     most_free = true
     random = false
   }
-
+/*
   security_group_filter {
     filters = {
       "tag:Name": "default"
     }
   }
-
+*/
   metadata_options {
     http_endpoint = "enabled"
     http_tokens = "required"
